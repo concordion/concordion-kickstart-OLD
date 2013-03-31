@@ -1,0 +1,35 @@
+defaultTasks 'clean', 'build'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.concordion:concordion:1.4.3'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src'
+        }
+    }
+    test {
+        java {
+            srcDir 'specs'
+        }
+        resources {
+            srcDir 'specs'
+        }
+    }
+}
+
+test {
+    systemProperties 'concordion.output.dir': file("${buildDir}/concordion-results")
+}

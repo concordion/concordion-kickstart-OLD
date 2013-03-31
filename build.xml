@@ -1,0 +1,79 @@
+<project name="concordion-kickstart" default="build" basedir=".">
+
+    <property name="version" value="1.4.3"/>
+    <property name="productName" value="concordion-kickstart"/>
+
+
+    <property name="dir.concordion.output" value="build/concordion-output"/>
+
+    <path id="compile.classpath">
+        <fileset dir="lib" includes="*.jar"/>
+    </path>
+
+    <target name="clean" description="Remove old build artifacts">
+        <delete dir="build" />
+        <delete dir="dist"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+
+        <javac classpathref="compile.classpath"
+               destdir="build/classes"
+               srcdir="src:specs"
+               debug="yes"
+               failonerror="yes"
+               source="1.5"
+               target="1.5"
+               includeantruntime="no"
+        />
+
+        <copy todir="build/classes">
+            <fileset dir="src" />
+            <fileset dir="specs" />
+        </copy>
+    </target>
+
+    <target name="run.tests" depends="compile">
+        <mkdir dir="build/test-output"/>
+        <mkdir dir="build/concordion-output"/>
+
+        <junit fork="yes" forkmode="once" printsummary="yes" haltonfailure="yes" showoutput="yes">
+            <jvmarg value="-Dconcordion.output.dir=build/concordion-output"/>
+
+            <classpath>
+                <path refid="compile.classpath"/>
+                <pathelement location="build/classes"/>
+            </classpath>
+
+            <formatter type="plain" usefile="false"/>
+
+            <batchtest todir="build/test-output">
+                <fileset dir="specs">
+                    <include name="**/*Test.java"/>
+                    <include name="**/*Fixture.java"/>
+                    <exclude name="**/Abstract*"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="build"
+        description="Builds everything from scratch"
+        depends="compile, run.tests"
+    />
+
+    <target name="dist" depends="clean, build">
+        <mkdir dir="dist"/>
+
+        <zip destfile="dist/${productName}-${version}.zip" compress="true">
+            <zipfileset prefix="${productName}" dir=".">
+                <exclude name="dist/**"/>
+                <exclude name="build/**"/>
+                <exclude name="bin/**"/>
+            </zipfileset>
+        </zip>
+    </target>
+
+
+</project>

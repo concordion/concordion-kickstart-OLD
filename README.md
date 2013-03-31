@@ -1,4 +1,4 @@
-The Concordion kickstart example from the [Concordion tutorial](http://www.concordion.org/Tutorial.html). 
+The kickstart example from the [Concordion tutorial](http://www.concordion.org/Tutorial.html). 
 
 History prior to April 2013 is in the [Subversion repository](http://concordion.googlecode.com/svn/).
 

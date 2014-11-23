@@ -6,9 +6,13 @@ repositories {
     mavenCentral()
 }
 
+wrapper {
+    gradleVersion = "2.2"
+}
+
 dependencies {
     testCompile 'junit:junit:4.11'
-    testCompile 'org.concordion:concordion:1.4.4'
+    testCompile 'org.concordion:concordion:1.4.6'
 }
 
 sourceSets {
@@ -31,5 +35,5 @@ sourceSets {
 }
 
 test {
-    systemProperties 'concordion.output.dir': file("${buildDir}/concordion-results")
+    systemProperties['concordion.output.dir'] = "${reporting.baseDir}"
 }

@@ -3,6 +3,7 @@ defaultTasks 'clean', 'build'
 apply plugin: 'java'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -11,7 +12,7 @@ wrapper {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.11'
+    testCompile 'junit:junit:4.12'
     testCompile 'org.concordion:concordion:1.4.7'
 }
 

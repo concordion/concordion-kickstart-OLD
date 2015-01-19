@@ -1,6 +1,6 @@
 <project name="concordion-kickstart" default="build" basedir=".">
 
-    <property name="version" value="1.4.5"/>
+    <property name="version" value="1.4.7"/>
     <property name="productName" value="concordion-kickstart"/>
 
 

@@ -13,7 +13,7 @@ wrapper {
 
 dependencies {
     testCompile 'junit:junit:4.12'
-    testCompile 'org.concordion:concordion:1.4.7'
+    testCompile 'org.concordion:concordion:1.5.0'
 }
 
 sourceSets {
